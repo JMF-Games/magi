@@ -58,8 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Controllers\3DMovementController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\IController.cs" />
+     <Compile Include="Assets\Scripts\JmfGameKit\Input\Input.cs" />
+     <Compile Include="Assets\Scripts\JmfGameKit\Input\InputManager.cs" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
  <HintPath>C:/Users/myles.blasonato/OneDrive/Documents/jmfGames/magi/Project Magi/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
  </Reference>
@@ -645,6 +645,12 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Controllers.csproj">
+      <Project>{4D524E55-C20D-03AA-0B9F-CEC5295EE20B}</Project>
+      <Name>Controllers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
