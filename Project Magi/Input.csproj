@@ -58,9 +58,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\JmfGameKit\Input\Gesture.cs" />
+     <Compile Include="Assets\Scripts\JmfGameKit\Input\GestureManager.cs" />
      <Compile Include="Assets\Scripts\JmfGameKit\Input\IInput.cs" />
      <Compile Include="Assets\Scripts\JmfGameKit\Input\Input.cs" />
      <Compile Include="Assets\Scripts\JmfGameKit\Input\InputManager.cs" />
+     <Compile Include="Assets\Scripts\JmfGameKit\Input\SwipeDownGesture.cs" />
      <None Include="Assets\Scripts\JmfGameKit\Input\Input.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/myles.blasonato/OneDrive/Documents/jmfGames/magi/Project Magi/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -614,6 +617,12 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Spells.csproj">
+      <Project>{45F3C947-D9E3-01AE-DDBD-A75435FDC4E8}</Project>
+      <Name>Spells</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

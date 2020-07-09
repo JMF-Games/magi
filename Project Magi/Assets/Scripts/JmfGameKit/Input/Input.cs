@@ -5,44 +5,41 @@ namespace JmfGameKit.Input
 {
     public class Input : MonoBehaviour, IInput
     {
-        [SerializeField] string _horizontalAxis, _verticalAxis, _mouseXAxis, _mouseYAxis;
+        #region Variables
 
-        Vector3 _mousePosition, _movementDirection;
+        Vector2 _mousePositionAxis;
+        Vector2 _mousePosition;
 
-        public Vector3 MovementDirection
+        public Vector2 MousePositionAxis
         {
-            get => _movementDirection;
-            set => _movementDirection = value;
+            get
+            {
+                _mousePositionAxis = new Vector2(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y"));
+                return _mousePositionAxis;
+            }
+        }
+
+        public Vector2 MousePosition => UnityEngine.Input.mousePosition;
+
+        #endregion
+
+        #region Methods
+
+        public bool GetKeyDown(KeyCode button)
+        {
+            return UnityEngine.Input.GetKeyDown(button);
         }
         
-        public Vector3 MousePosition
+        public bool GetKeyUp(KeyCode button)
         {
-            get => _mousePosition;
-            set => _mousePosition = value;
+            return UnityEngine.Input.GetKeyUp(button);
         }
 
-        void Update()
+        public float GetAxis(string axis)
         {
-            GetMouse();
-            GetKey();
+            return UnityEngine.Input.GetAxis(axis);
         }
 
-        public float[] GetMouse()
-        {
-            _mousePosition.x = UnityEngine.Input.GetAxis(_mouseXAxis);
-            _mousePosition.y = UnityEngine.Input.GetAxis(_mouseYAxis);
-
-            var floatConversion = new[] {_mousePosition.x, _mousePosition.y};
-            return floatConversion;
-        }
-
-        public float[] GetKey()
-        {
-            _movementDirection.x = UnityEngine.Input.GetAxis(_horizontalAxis);
-            _movementDirection.y = UnityEngine.Input.GetAxis(_verticalAxis);
-            
-            var floatConversion = new[] {_movementDirection.x, _movementDirection.y};
-            return floatConversion;
-        }
+        #endregion
     }
 }

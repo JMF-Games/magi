@@ -1,8 +1,10 @@
-﻿namespace JmfGameKit.Input
+﻿using UnityEngine;
+
+namespace JmfGameKit.Input
 {
     public interface IInput
     {
-        float[] GetMouse();
-        float[] GetKey();
+        bool GetKeyDown(KeyCode button);
+        bool GetKeyUp(KeyCode button);
     }
 }

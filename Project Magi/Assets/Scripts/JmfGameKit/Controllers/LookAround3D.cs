@@ -1,41 +1,65 @@
-﻿using JmfGameKit.Input;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace JmfGameKit.Controllers
 {
     public class LookAround3D : MonoBehaviour, IController
     {
-        [SerializeField] Input.Input _input;
-        [SerializeField] float _sensitivity = 1f;
-        [SerializeField] float _clampAngle = 90f;
-        float _xRotation = 0f;
-        GameObject _gameObjectToLook;
-        Vector3 _directionToMoveIn;
+        #region Variables
         
-        [SerializeField] float _speed;
+        [SerializeField] float _sensitivity = 100f;
+        [SerializeField] float _clampAngle = 90f;
+
+        Camera _mainCam;
+        Input.Input _input;
+
+        float _xRotation = 0f, _yRotation = 0f;
+        
+        #endregion
+
+        #region Methods
 
         void Awake()
         {
-            _gameObjectToLook = gameObject;
             _input = GetComponent<Input.Input>();
-            
-            // default position
-            _directionToMoveIn = new Vector3(0f, 2.5f, 0f);
+            _mainCam = Camera.main;
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         void Update()
         {
+            GetMouseInput();
             Move();
         }
 
         public void Move()
         {
-            _gameObjectToLook.transform.position += new Vector3
-            (
-                (_directionToMoveIn.x + _input.MovementDirection.x) * _speed * Time.fixedDeltaTime,
-                0f, 
-                (_directionToMoveIn.z + _input.MovementDirection.y) * _speed * Time.fixedDeltaTime
-            );
+            RotateCameraY();
+            RotateObjectX();
         }
+
+        #endregion
+
+        #region  HelperMethods
+        
+        void GetMouseInput()
+        {
+            _xRotation = _input.GetAxis("Mouse X") * _sensitivity * Time.fixedDeltaTime;
+            _yRotation -= _input.GetAxis("Mouse Y") * _sensitivity * Time.fixedDeltaTime;
+        }
+
+        void RotateCameraY()
+        {
+            _yRotation = Mathf.Clamp(_yRotation, -_clampAngle, _clampAngle);
+            _mainCam.transform.localRotation = Quaternion.Euler(_yRotation, 0, 0);
+        }
+
+        void RotateObjectX()
+        {
+            transform.Rotate(0, _xRotation, 0);
+        }
+
+        #endregion
     }
 }
