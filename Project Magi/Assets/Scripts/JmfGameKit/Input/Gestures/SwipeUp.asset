@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488c91621969a844f89f68f21cc047b1, type: 3}
-  m_Name: Grow
+  m_Script: {fileID: 11500000, guid: 16bdad6804fc56840a7ad30549ca6f81, type: 3}
+  m_Name: SwipeUp
   m_EditorClassIdentifier: 
-  _distance: 100
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _sizeChange: {x: 2, y: 2, z: 2}
-  _duration: 0.5
+  _spell: {fileID: 11400000, guid: ecc80aa32cbacf74884cfb307c956c76, type: 2}

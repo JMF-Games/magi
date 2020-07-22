@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace JmfGameKit.Input
 {
@@ -8,20 +9,20 @@ namespace JmfGameKit.Input
         [SerializeField] float _deadZone = 0f;
         [SerializeField] float _distance = 100f;
         [SerializeField] LayerMask _mask;
-        [SerializeField] double _gestureDuration;
+
         Vector3 _startGesturePosition, _endGesturePosition;
         Camera _camera;
         Input _input;
         Ray _ray;
         RaycastHit _hit;
         GameObject _target;
-        float _startTime;
-        float _endTime;
 
         void Awake()
         {
             _input = FindObjectOfType<Input>();
+
             _camera = Camera.main;
+
             Cursor.visible = false;
             
             foreach (var gesture in _gestures)
@@ -34,33 +35,42 @@ namespace JmfGameKit.Input
         {
             if (_input.GetKeyDown(KeyCode.Mouse0))
                 StartGesture();
-            else if (_input.GetKeyUp(KeyCode.Mouse0))
+            
+            if (_input.GetKeyUp(KeyCode.Mouse0))
                 EndGesture();
         }
 
         void StartGesture()
         {
-            _startTime = Time.time;
             _startGesturePosition = _input.MousePositionAxis;
+
+            Debug.Log(_startGesturePosition);
+
             RayCast();
+            
             Cursor.lockState = CursorLockMode.None;
         }
 
         void EndGesture()
         {
-            _endTime = Time.time;
             _endGesturePosition = _input.MousePositionAxis;
+            
+            Debug.Log(_endGesturePosition);
+
             UpdateGesture();
-           // _target = null;
-            Cursor.lockState = CursorLockMode.Locked;
+
+            _target = null;
+
+           Cursor.lockState = CursorLockMode.Locked;
         }
 
         void UpdateGesture()
         {
-            var swipeDistance = (_endGesturePosition - _startGesturePosition).magnitude;
-            var swipeTime = _endTime - _startTime;
+            var swipeDistance = Vector3.Distance(_endGesturePosition, _startGesturePosition);
+            
+            Debug.Log(swipeDistance);
 
-            if (swipeTime < _gestureDuration && swipeDistance > _deadZone)
+            if (swipeDistance > _deadZone)
             {
                 foreach (var gesture in _gestures)
                 {

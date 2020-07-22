@@ -14,7 +14,7 @@ namespace JmfGameKit.Input
         {
             get
             {
-                _mousePositionAxis = new Vector2(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y"));
+                _mousePositionAxis = new Vector2(UnityEngine.Input.GetAxisRaw("Mouse X"), UnityEngine.Input.GetAxisRaw("Mouse Y"));
                 return _mousePositionAxis;
             }
         }
